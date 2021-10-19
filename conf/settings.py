@@ -25,8 +25,7 @@ SECRET_KEY = os.environ['SECRET_KEY']
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [ '127.0.0.1', 
-]
+ALLOWED_HOSTS = [ '127.0.0.1', ]
 
 
 # Application definition
@@ -38,8 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'whitenoise.runserver_nostatic',
-    'django.contrib.staticfiles',
     'django.contrib.sites',
+    'django.contrib.staticfiles',
+    
 
     #THIRD
     'rest_framework',
@@ -56,6 +56,17 @@ INSTALLED_APPS = [
     'articles.apps.ArticlesConfig',
     'api.apps.ApiConfig',
     ]
+
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',
+    ],
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.TokenAuthentication',
+    ]
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
