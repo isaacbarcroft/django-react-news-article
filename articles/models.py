@@ -24,7 +24,7 @@ class Article(models.Model):
         choices=CHOICES,
         default=DRAFT,
     )
-    is_published = models.BooleanField(default=False, null=True)
+    # is_published = models.BooleanField(default=False, null=True)
 
     def __str__(self):  
         return self.title
