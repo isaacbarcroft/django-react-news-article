@@ -9,7 +9,7 @@ class User(AbstractUser):
 
 
 class Profile(models.Model):
-    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, blank=True)
     avatar = models.ImageField(upload_to='profile/', null=True)
     alias = models.CharField(max_length=255, null=True)
 

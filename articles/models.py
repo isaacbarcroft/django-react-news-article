@@ -14,11 +14,13 @@ class Article(models.Model):
         (PUBLISHED, 'Published'),
         (REJECTED, 'Rejected'),
     ]
+    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, null=True)
     title = models.CharField(max_length= 255, null=True)
     body = models.TextField()
     image = models.ImageField(upload_to='profiles/', null=True)
     created_at = models.DateTimeField(auto_now_add=True, null=True)
     updated_at = models.DateTimeField(auto_now_add=True, null=True)
+    categories = models.CharField(max_length= 255, null=True)
     options = models.CharField(
         max_length=3,
         choices=CHOICES,
@@ -28,3 +30,4 @@ class Article(models.Model):
 
     def __str__(self):  
         return self.title
+
