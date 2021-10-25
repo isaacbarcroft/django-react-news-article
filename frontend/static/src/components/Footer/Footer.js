@@ -9,7 +9,7 @@ function Footer(){
         <>
         <footer id = "footer"> © Carolina Code School Student - Isaac Barcroft 
         <div class = "footButton">
-        <button onclick={topFunction()} id="myBtn" title="Go to top">Top</button>
+        
         </div>
     </footer>
         </>

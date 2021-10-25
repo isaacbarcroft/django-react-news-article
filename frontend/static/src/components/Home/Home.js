@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Route, Redirect } from 'react-router-dom';
 import Cookies from 'js-cookie';
 import ReadMoreReact from 'read-more-react';
+import SideMenu from '../SideMenu/SideMenu';
 
 
 function Home(props){
@@ -12,7 +13,7 @@ function Home(props){
     })
     const [selection, setSelection] = useState();
     const [preview, setPreview] = useState('');
-
+   
     const readMore = <div className="readMore">Read More</div>
    const articleHTML = props.articles?.map(article => <div><h3>{article.title}</h3><p>{article.body}</p><span>{article.categories}</span><img className="article-image" src={article.image}></img></div>)
    console.log(props)
@@ -37,6 +38,7 @@ function Home(props){
         <div className='container-md' >
          <h2 className="headers shadow p-3 mb-5 bg-body rounded mt-2" >{selection ? selection.toUpperCase() : 'All'}</h2>
          <div className="navButtons" >
+        <SideMenu />
          <div class="container">
             <div class="row">
                 <div class="col text-center">

@@ -81,7 +81,7 @@ function MyArticles(props){
       console.log({myFilteredDrafts})
 
 
-      const myFilteredArticlesHTML = myFilteredArticles?.map(article => <div className="mt-3 shadow p-3 mb-5 bg-body rounded mt-2"><img className="article-image rounded mx-auto d-block" src={article.image}></img><span><p className="font-italic" style={{fontFamily: 'Oswald', fontStyle: 'iitalic'}}>{article.options}</p></span><h3 className="articleTitle" style={{fontFamily: 'Oswald'}}>{article.title}</h3><ReadMoreReact text={article.body}
+      const myFilteredArticlesHTML = myFilteredArticles?.map(article => <div   style={{background: 'antiquewhite'}} className="backgroundDiv mt-3 shadow p-3 mb-5 bg-body rounded mt-2"><img className="article-image rounded mx-auto d-block" src={article.image}></img><span><p className="font-italic" style={{fontFamily: 'Oswald', fontStyle: 'iitalic'}}>{article.options}</p></span><h3 className="articleTitle" style={{fontFamily: 'Oswald'}}>{article.title}</h3><ReadMoreReact text={article.body}
       min={100}
       ideal={200}
       max={1000000}

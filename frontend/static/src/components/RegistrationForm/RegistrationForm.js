@@ -107,7 +107,7 @@ if(props.isAuth){
                         />
                     {/* </div>
                 </div> */}
-                 <button type="submit" className="registration-btn btn btn-info d-flex justify-content-center mt-3">Register</button>
+                 <button type="submit" className="registration-btn btn btn-dark d-flex justify-content-center mt-3"style={{fontFamily: 'Oswald'}}>Register</button>
                  </div>
             </form>
         </>

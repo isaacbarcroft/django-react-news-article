@@ -1,7 +1,8 @@
 from .models import Article 
 from .serializers import ArticleSerializer
 from rest_framework import generics
-from rest_framework.permissions import IsAuthenticatedOrReadOnly
+from rest_framework import permissions
+from rest_framework.permissions import IsAuthenticatedOrReadOnly, AllowAny
 from .permissions import IsOwnerOrReadOnly
 from django.shortcuts import get_object_or_404
 
@@ -10,7 +11,7 @@ from django.shortcuts import get_object_or_404
 class ArticleListAPIView(generics.ListCreateAPIView):
     # queryset = Article.objects.all()
     serializer_class = ArticleSerializer
-    permissions_classes = IsAuthenticatedOrReadOnly
+    permission_classes = (IsAuthenticatedOrReadOnly,)
 
     def get_queryset(self):
         # url api_v1/articles/ will only return publishef articles
@@ -37,7 +38,7 @@ class ArticleListAPIView(generics.ListCreateAPIView):
 class ArticleDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Article.objects.all()
     serializer_class = ArticleSerializer
-    permissions_classes = IsOwnerOrReadOnly
+    permission_classes = (IsOwnerOrReadOnly,)
 
 
 # class ArticleListAPIView(generics.ListCreateAPIView):

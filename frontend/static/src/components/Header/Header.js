@@ -11,23 +11,24 @@ function Header(props){
                 </button> */}
                 <div className="collapse navbar-collapse nav justify-content-end text-light" id="navbarResponsive">
                     <ul className="navbar-nav ml-auto text-light">
-                        <li className="nav-item text-light">
-                            <NavLink to='/'>Home</NavLink>
+                        <li className="nav-item mt-2 mx-1">
+                            <NavLink  className="" style={{textDecoration: 'none'}} to='/'>Home</NavLink>
                         </li>
                         {/* <li className="nav-item">
                             <NavLink to='/profile'>Profile</NavLink>
                         </li> */}
-                        <li className="nav-item">
-                            <NavLink to='/register'>Register</NavLink>
+
+                        <li className="nav-item mt-2">
+                            <NavLink  style={{textDecoration: 'none'}} to='/myarticles'>My Articles</NavLink>
                         </li>
-                        <li className="nav-item">
-                            <NavLink to='/login'>Login</NavLink>
+                        <li className="nav-item mt-2 mx-1">
+                            <NavLink style={{textDecoration: 'none'}} to='/register'>Register</NavLink>
                         </li>
-                        <li className="nav-item">
-                            <NavLink to='/myarticles'>My Articles</NavLink>
+                        <li className="nav-item mt-2 mx-1">
+                            <NavLink  style={{textDecoration: 'none'}} to='/login'>Login</NavLink>
                         </li>
                         <li className="btn-link">
-                            <button className="btn btn-link logout text-light" type="button" onClick={() => props.handleLogoutSubmit()}>Logout</button>
+                            <button style={{textDecoration: 'none'}} className="btn btn-link logout text-light" type="button" onClick={() => props.handleLogoutSubmit()}>Logout</button>
                         </li>
                     </ul>
                 </div>

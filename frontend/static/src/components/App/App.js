@@ -1,7 +1,7 @@
 import Profile from './../Profile/Profile';
 import { useState, useEffect } from 'react';
 import './App.css';
-import { Route, Switch, Redirect, withRouter, useHistory  } from 'react-router-dom';
+import { Route, Switch, Redirect, withRouter, useHistory, useLocation  } from 'react-router-dom';
 import Cookies from 'js-cookie';
 import RegistrationForm from './../RegistrationForm/RegistrationForm';
 import LoginPage from '../LoginForm/LoginForm';
@@ -23,6 +23,7 @@ function App() {
     username: '',
     password: '',
 });
+const location = useLocation();
   const [articles, setArticles] = useState([]);
  const [author, setAuthor] = useState();
   const [isAuth, setIsAuth] = useState(null);
@@ -44,13 +45,10 @@ function App() {
       abortController.abort();
     }
    }
-  
    checkAuth()
-   
   }, [history])
 
   useEffect(() => {
-
   async function getArticles(){
     const response = await fetch(`/api_v1/articles/`);
     if(!response.ok) {
@@ -62,7 +60,7 @@ function App() {
     }
     }
     getArticles();
-  },[, isAuth])
+  },[,isAuth])
  
 
     async function handleLogoutSubmit(event){
@@ -129,18 +127,19 @@ function App() {
           <MyArticles articles={articles} isAuth={isAuth}/>
         </Route>
         <Route path='/' >
-          <Home articles={articles} isAuth={isAuth}/>
+          <Home articles={articles} />
         </Route>
       </Switch>
       <ScrollTop
+      
         text="^"
         distance={50}
         breakpoint={908}
-        style={{ backgroundColor: "white" }}
+        style={{ backgroundColor: "#191C1F", color: "white" }}
         className="scroll-your-role"
         speed={50}
         target={0}
-        
+        icon={<i class="bi bi-caret-up-square"></i>}
       />
       <Footer />
       </>
