@@ -62,7 +62,7 @@ const DraftArticle = (draftArticle) => {
     return (
         <div>
 
-<form className="mt-5 col-6 draftForm">
+<form className="mt-5 col-8 draftFormn ds-flex justify-content-center">
             <div className="form-group text-left mb-3">
                 <label htmlFor='title'>Title</label>
                 <input type="text"

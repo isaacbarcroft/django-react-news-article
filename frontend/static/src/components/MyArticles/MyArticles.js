@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Route, Redirect, withRouter } from 'react-router-dom';
 import Cookies from 'js-cookie';
 import DraftArticle from '../DraftArticle/DraftArticle';
+import ReadMoreReact from 'read-more-react';
 
 
 function MyArticles(props){
@@ -69,7 +70,7 @@ function MyArticles(props){
             categories: '',
         })
       }
-      
+      const readMore = <div className="readMore">Read More</div>
       const options = [...new Set(myArticles?.map(article => article.options))];
       console.log(options)
       const categoriesHTML = options.map(option => <button className="nav-btn btn btn-dark mx-2 ds-flex justify-content-center" key={option} onClick={() => setSelection(option)}>{option}</button>); 
@@ -80,7 +81,11 @@ function MyArticles(props){
       console.log({myFilteredDrafts})
 
 
-      const myFilteredArticlesHTML = myFilteredArticles?.map(article => <div className="mt-3"><img className="article-image rounded mx-auto d-block" src={article.image}></img><h3 className="articleTitle">{article.title}</h3><p className="text-truncate articleBody">{article.body}</p></div>)
+      const myFilteredArticlesHTML = myFilteredArticles?.map(article => <div className="mt-3"><img className="article-image rounded mx-auto d-block" src={article.image}></img><h3 className="articleTitle">{article.title}</h3><ReadMoreReact text={article.body}
+      min={100}
+      ideal={200}
+      max={1000000}
+      readMoreText={readMore}/></div>)
       console.log(myFilteredArticlesHTML)
 
     if(!props.isAuth){
@@ -90,12 +95,16 @@ function MyArticles(props){
     return(
         <>
         <div className=" container ds-flex justify-content-center">
-        <h2 className="d-flex justify-content-center mt-3 headers shadow p-3 mb-5 bg-body rounded">My Articles</h2>
+        <h2 className="d-flex justify-content-center mt-2 headers shadow p-3 mb-5 bg-body rounded">My Articles</h2>
         {categoriesHTML}
         {selection === "DRAFT" ? myFilteredDraftsHTML : myFilteredArticlesHTML }
-        
 
-        <form className="mt-3 col-6">
+        <div className="border" ></div>
+        
+        <div className="container">
+        <div className="ds-flex justify-content-center mt-3">
+        <h2 className="newArticleForm text-center mt-3">Submit new article</h2>
+        <form className="mt-3 ds-flex justify-content-center mt-3">
             <div className="form-group text-left mb-3">
                 <label htmlFor='title'>Title</label>
                 <input type="text"
@@ -110,7 +119,7 @@ function MyArticles(props){
             </div>
             <div className="form-group text-left mb-3">
                 <label htmlFor='body'>Article Body</label>
-                <input type="text"
+                <textarea type="text"
                     className="form-control"
                     id='articleText'
                     placeholder="Article body"
@@ -131,10 +140,10 @@ function MyArticles(props){
                 <input type="file" name="image" onChange={handleImage} />
             </div>
         
-            <div className="form-group text-left mb-3">
+            <div className="form-group text-left mb-3 ">
                 {/* <label htmlFor='options'>Draft/Submitted</label> */}
                 <button type="button"
-                    className="form-control"
+                    className="form-control btn btn-dark"
                     id='articleOptions'
                     onClick={handleSubmit}
                     required
@@ -145,7 +154,7 @@ function MyArticles(props){
             <div className="form-group text-left mb-3">
                 {/* <label htmlFor='options'>Draft/Submitted</label> */}
                 <button type="button"
-                    className="form-control"
+                    className="form-control  btn btn-dark"
                     id='articleOptions'
                     onClick={handleSubmit}
                     required
@@ -156,6 +165,8 @@ function MyArticles(props){
             
          
         </form>
+        </div>
+        </div>
         </div>
         </>
     )

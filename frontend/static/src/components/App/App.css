@@ -49,3 +49,10 @@ button:hover {
   padding: 10px;
   border: 1px solid black;
 }
+.newArticleForm {
+  /* border-top: 1px solid black; */
+}
+
+.readMore {
+  color: rgb(33, 81, 240)
+}
