@@ -10,6 +10,7 @@ pillow = "~=8.4.0"
 django-rest-auth = "~=0.9.4"
 django-allauth = "*"
 whitenoise = "*"
+gunicorn = "~=20.0.4"
 
 [dev-packages]
 
