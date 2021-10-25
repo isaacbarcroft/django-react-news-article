@@ -1,0 +1,46 @@
+.App {
+  text-align: center;
+}
+.article-image{
+  width:300px;
+  overflow:hidden;
+}
+.nav-item a {
+  margin-left: 5px;
+  color: white;
+}
+.headerTitle {
+  text-align: center;
+}
+.headers {
+  text-align: center;
+}
+.articleTitle{
+  text-align: center;
+  border-bottom: 1px black solid; 
+  margin: 0 400px;
+}
+.articleBody {
+  padding: 0 90px;
+  
+}
+.logout{
+  display: flex;
+  justify-content: right;
+  color: white;
+}
+.logout a {
+  color: white;
+}
+.nav-btn {
+  width: 120px;
+  color: white;
+}
+.registrationForm {
+  margin: 0 400px;
+}
+
+button:hover {
+  color: #3c3e41
+
+}
