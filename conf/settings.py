@@ -159,7 +159,7 @@ AUTH_USER_MODEL = 'accounts.User'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
-
+REACT_APP_DIR = os.path.join(BASE_DIR, 'frontend/static')
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
