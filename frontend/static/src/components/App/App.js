@@ -9,8 +9,10 @@ import MainArticle from '../MainArticle/MainArticle';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Header from './../Header/Header';
 import Home from './../Home/Home';
-import Categories from './../Categories/Categories'
-import MyArticles from './../MyArticles/MyArticles'
+import Categories from './../Categories/Categories';
+import MyArticles from './../MyArticles/MyArticles';
+import Footer from '../Footer/Footer';
+import ScrollTop from 'react-scrolltop-button';
 
 function App() {
   const [profile, setProfile] = useState({
@@ -32,7 +34,7 @@ function App() {
     const checkAuth = async () => {
     const response = await fetch('/rest-auth/user/', {signal: signal});
     if(!response.ok) {
-      alert('not ok')
+      console.log('not ok')
       setIsAuth(false);
     } else {
       console.log({response})
@@ -49,7 +51,7 @@ function App() {
 
   useEffect(() => {
 
-  async function getArticles(event){
+  async function getArticles(){
     const response = await fetch(`/api_v1/articles/`);
     if(!response.ok) {
       console.log(response);
@@ -58,16 +60,9 @@ function App() {
       setArticles(data);
       console.log({data})
     }
-    
-    // const matchedArticle = articles.find(article => {
-    // const articleIdString = .id.toString()
-    // return articleIdString===event.target.value
     }
-    // setSelectedArticle(matchedArticle)
-    // setArticle(data);
-   
     getArticles();
-  },[isAuth])
+  },[, isAuth])
  
 
     async function handleLogoutSubmit(event){
@@ -134,10 +129,20 @@ function App() {
           <MyArticles articles={articles} isAuth={isAuth}/>
         </Route>
         <Route path='/' >
-          <Home articles={articles}/>
+          <Home articles={articles} isAuth={isAuth}/>
         </Route>
       </Switch>
-      
+      <ScrollTop
+        text="^"
+        distance={50}
+        breakpoint={908}
+        style={{ backgroundColor: "white" }}
+        className="scroll-your-role"
+        speed={50}
+        target={0}
+        
+      />
+      <Footer />
       </>
    
   );

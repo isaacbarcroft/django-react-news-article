@@ -64,10 +64,11 @@ function LoginPage(props){
                 onChange={handleInput}
                 value={props.users.password}
                 />
-                  <div class="row">
+                <div className="container">
+                    <div class="row">
                         <div class="col text-center">
-                 <button type="submit" className="Login-btn btn btn-info mt-3">Login</button>
-                       
+                            <button type="submit" className="Login-btn btn btn-info mt-3">Login</button>
+                        </div>
                     </div>
                 </div>
                    

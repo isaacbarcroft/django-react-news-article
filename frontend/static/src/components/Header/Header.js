@@ -5,10 +5,10 @@ function Header(props){
     return(
         <nav className="navbar navbar-expand-lg navbar-dark bg-dark nav">
             <div className="container">
-                <a className="navbar-brand" href="/">Articles App</a>
-                <button className="Nabar-toggler" type="button" data-toggle="collapse" data-target="navbarResponsive" aria-controls="navbarResponsive" aria-label="Toggle navigation">
+                <a className="navbar-brand" style={{fontFamily: 'Oswald', weight: 700}} href="/">Articles App</a>
+                {/* <button className="Nabar-toggler" type="button" data-toggle="collapse" data-target="navbarResponsive" aria-controls="navbarResponsive" aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
-                </button>
+                </button> */}
                 <div className="collapse navbar-collapse nav justify-content-end text-light" id="navbarResponsive">
                     <ul className="navbar-nav ml-auto text-light">
                         <li className="nav-item text-light">

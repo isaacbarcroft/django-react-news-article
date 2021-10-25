@@ -60,9 +60,9 @@ const DraftArticle = (draftArticle) => {
       }
 
     return (
-        <div>
-
-<form className="mt-5 col-8 draftFormn ds-flex justify-content-center">
+        <div className="shadow p-3 mb-5 bg-body rounded mt-2">
+    <h2 style={{fontFamily: 'Oswald'}} className="mt-2 text-center">{article.title}</h2>
+<form className="mt-5 col-8 draftFormn ds-flex justify-content-center ">
             <div className="form-group text-left mb-3">
                 <label htmlFor='title'>Title</label>
                 <input type="text"
@@ -102,7 +102,7 @@ const DraftArticle = (draftArticle) => {
             <div className="form-group text-left mb-3">
                 {/* <label htmlFor='options'>Draft/Submitted</label> */}
                 <button type="button"
-                    className="form-control  btn btn-dark"
+                    className="homeButton form-control  btn btn-dark"
                     id='articleOptions'
                     onClick={handleSubmit}
                     required

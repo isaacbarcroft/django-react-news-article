@@ -73,7 +73,7 @@ function MyArticles(props){
       const readMore = <div className="readMore">Read More</div>
       const options = [...new Set(myArticles?.map(article => article.options))];
       console.log(options)
-      const categoriesHTML = options.map(option => <button className="nav-btn btn btn-dark mx-2 ds-flex justify-content-center" key={option} onClick={() => setSelection(option)}>{option}</button>); 
+      const categoriesHTML = options.map(option => <button className="myArticleButton nav-btn btn btn-dark mx-2 justify-content-center" key={option} style={{fontFamily: 'Oswald'}} onClick={() => setSelection(option)}>{option}</button>); 
       const myFilteredArticles = myArticles?.filter(article => selection ? article.options === selection : article);
       const myFilteredDrafts = myArticles?.filter(article => selection === "DRAFT" ? article.options === "DRAFT" : article);
       const myFilteredDraftsHTML = myFilteredDrafts?.map(article => <DraftArticle article={article} />)
@@ -81,7 +81,7 @@ function MyArticles(props){
       console.log({myFilteredDrafts})
 
 
-      const myFilteredArticlesHTML = myFilteredArticles?.map(article => <div className="mt-3"><img className="article-image rounded mx-auto d-block" src={article.image}></img><h3 className="articleTitle">{article.title}</h3><ReadMoreReact text={article.body}
+      const myFilteredArticlesHTML = myFilteredArticles?.map(article => <div className="mt-3 shadow p-3 mb-5 bg-body rounded mt-2"><img className="article-image rounded mx-auto d-block" src={article.image}></img><span><p className="font-italic" style={{fontFamily: 'Oswald', fontStyle: 'iitalic'}}>{article.options}</p></span><h3 className="articleTitle" style={{fontFamily: 'Oswald'}}>{article.title}</h3><ReadMoreReact text={article.body}
       min={100}
       ideal={200}
       max={1000000}
@@ -94,9 +94,15 @@ function MyArticles(props){
     
     return(
         <>
-        <div className=" container ds-flex justify-content-center">
+        <div className=" container-md ">
         <h2 className="d-flex justify-content-center mt-2 headers shadow p-3 mb-5 bg-body rounded">My Articles</h2>
-        {categoriesHTML}
+        <div class="container">
+            <div class="row">
+                <div class="col text-center">
+                    {categoriesHTML}
+                </div>
+            </div>
+        </div>
         {selection === "DRAFT" ? myFilteredDraftsHTML : myFilteredArticlesHTML }
 
         <div className="border" ></div>
@@ -143,7 +149,7 @@ function MyArticles(props){
             <div className="form-group text-left mb-3 ">
                 {/* <label htmlFor='options'>Draft/Submitted</label> */}
                 <button type="button"
-                    className="form-control btn btn-dark"
+                    className="homeButton form-control btn btn-dark"
                     id='articleOptions'
                     onClick={handleSubmit}
                     required
@@ -154,7 +160,7 @@ function MyArticles(props){
             <div className="form-group text-left mb-3">
                 {/* <label htmlFor='options'>Draft/Submitted</label> */}
                 <button type="button"
-                    className="form-control  btn btn-dark"
+                    className=" homeButton form-control  btn btn-dark"
                     id='articleOptions'
                     onClick={handleSubmit}
                     required
