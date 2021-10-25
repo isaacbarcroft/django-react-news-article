@@ -26,7 +26,7 @@ SECRET_KEY = os.environ['SECRET_KEY']
 DEBUG = True
 
 ALLOWED_HOSTS = [ '127.0.0.1',
- 'https://django-react-news-article.herokuapp.com/']
+ 'django-react-news-article.herokuapp.com']
 
 
 # Application definition
