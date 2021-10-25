@@ -44,3 +44,8 @@ button:hover {
   color: #3c3e41
 
 }
+
+.draftForm {
+  padding: 10px;
+  border: 1px solid black;
+}

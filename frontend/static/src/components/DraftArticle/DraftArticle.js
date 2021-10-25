@@ -12,6 +12,7 @@ const DraftArticle = (draftArticle) => {
         image: null,
         categories: draftArticle.article.categories,
     })
+    const [preview, setPreview] = useState('');
 
     const handleChange = (event) => {
         const {name, value} = event.target;
@@ -24,6 +25,11 @@ const DraftArticle = (draftArticle) => {
           ...article, 
           image: file,
         });
+        const reader = new FileReader();
+        reader.onloadend = () => {
+          setPreview(reader.result);
+        }
+        reader.readAsDataURL(file);
     }
     
 
@@ -56,7 +62,7 @@ const DraftArticle = (draftArticle) => {
     return (
         <div>
 
-<form className="mt-3 col-6">
+<form className="mt-5 col-6 draftForm">
             <div className="form-group text-left mb-3">
                 <label htmlFor='title'>Title</label>
                 <input type="text"
@@ -71,7 +77,7 @@ const DraftArticle = (draftArticle) => {
             </div>
             <div className="form-group text-left mb-3">
                 <label htmlFor='body'>Article Body</label>
-                <input type="text"
+                <textarea type="text"
                     className="form-control"
                     id='articleText'
                     placeholder="Article body"
@@ -91,22 +97,12 @@ const DraftArticle = (draftArticle) => {
             <div className="form-group text-left mb-3">
                 <input type="file" name="image" onChange={handleImage} />
             </div>
-        
+            { <img src={article.image} alt="" />}
+           
             <div className="form-group text-left mb-3">
                 {/* <label htmlFor='options'>Draft/Submitted</label> */}
                 <button type="button"
-                    className="form-control"
-                    id='articleOptions'
-                    onClick={handleSubmit}
-                    required
-                    name='DFT'
-                    value="DRAFT"
-                    >Save as  Draft</button>
-            </div>
-            <div className="form-group text-left mb-3">
-                {/* <label htmlFor='options'>Draft/Submitted</label> */}
-                <button type="button"
-                    className="form-control"
+                    className="form-control  btn btn-dark"
                     id='articleOptions'
                     onClick={handleSubmit}
                     required

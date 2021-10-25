@@ -72,7 +72,7 @@ function MyArticles(props){
       
       const options = [...new Set(myArticles?.map(article => article.options))];
       console.log(options)
-      const categoriesHTML = options.map(option => <button className="nav-btn btn btn-dark mx-2" key={option} onClick={() => setSelection(option)}>{option}</button>); 
+      const categoriesHTML = options.map(option => <button className="nav-btn btn btn-dark mx-2 ds-flex justify-content-center" key={option} onClick={() => setSelection(option)}>{option}</button>); 
       const myFilteredArticles = myArticles?.filter(article => selection ? article.options === selection : article);
       const myFilteredDrafts = myArticles?.filter(article => selection === "DRAFT" ? article.options === "DRAFT" : article);
       const myFilteredDraftsHTML = myFilteredDrafts?.map(article => <DraftArticle article={article} />)
@@ -90,7 +90,7 @@ function MyArticles(props){
     return(
         <>
         <div className=" container ds-flex justify-content-center">
-        <h2>My Articles</h2>
+        <h2 className="d-flex justify-content-center mt-3 headers shadow p-3 mb-5 bg-body rounded">My Articles</h2>
         {categoriesHTML}
         {selection === "DRAFT" ? myFilteredDraftsHTML : myFilteredArticlesHTML }
         
