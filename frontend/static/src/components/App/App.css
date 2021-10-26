@@ -15,11 +15,12 @@
 .headers {
   text-align: center;
   font-family: 'Oswald', sans-serif;
+  margin:10px 200px ;
 }
 .articleTitle{
   text-align: center;
   border-bottom: 1px black solid; 
-  margin: 0 375px;
+  margin: 0 100px;
 }
 .articleBody {
   padding: 0 90px;
@@ -41,7 +42,9 @@
   margin: 0 400px;
 }
 
-.myArticleButton:hover {
+.myArticleButton:hover,
+.myArticleButton:focus {
+  font-size:20px !important;
   color: #3c3e41 !important;
   background-color: white !important;
   box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19) !important;
@@ -60,6 +63,7 @@
 }
 .homeButton:hover,
 .homeButton:focus{
+  font-size:25px !important;
   color: #3c3e41 !important;
   background-color: white !important;
   box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19) !important;
@@ -81,4 +85,7 @@
 .nav-item {
   text-decoration: none !important;
   
+}
+ReadMoreReact:hover {
+  cursor: pointer;
 }

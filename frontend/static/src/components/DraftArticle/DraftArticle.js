@@ -2,8 +2,9 @@ import { useState, useEffect } from 'react';
 import { Route, Redirect, withRouter } from 'react-router-dom';
 import Cookies from 'js-cookie';
 
-const DraftArticle = (draftArticle) => {
+const DraftArticle = (draftArticle, props) => {
     console.log({draftArticle})
+    const [myArticles, setMyArticles] = useState([]);
     const [article, setArticle] = useState({
 
         title: draftArticle.article.title,
@@ -32,6 +33,20 @@ const DraftArticle = (draftArticle) => {
         reader.readAsDataURL(file);
     }
     
+        
+        async function getMyArticles(){
+          const response = await fetch(`/api_v1/articles/?options=ALL/`);
+          if(!response.ok) {
+            console.log(response);
+          } else {
+            const data = await response.json();
+            setMyArticles(data);
+            console.log({data})
+            console.log({myArticles})
+          }
+        }
+       
+     
 
       const handleSubmit = (event) => {
         event.preventDefault();
@@ -43,20 +58,15 @@ const DraftArticle = (draftArticle) => {
         formData.append('categories', article.categories);
   
         const options = {
-          method: 'POST',
+          method: 'PUT',
           headers: {
             'X-CSRFToken': Cookies.get('csrftoken'),
           },
           body: formData,
         }
-        fetch('/api_v1/articles/', options);
-        // setState({
-        //     title: '',
-        //     body: '',
-        //     options: '',
-        //     image: null,
-        //     categories: '',
-        // })
+        fetch(`/api_v1/articles/${draftArticle.article.id}/`, options);
+       getMyArticles();
+       console.log('drID',draftArticle.article.id)
       }
 
     return (

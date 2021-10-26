@@ -108,7 +108,7 @@ const location = useLocation();
   return (
     
       <>
-      <Header handleLogoutSubmit={handleLogoutSubmit}/>
+      <Header handleLogoutSubmit={handleLogoutSubmit} isAuth={isAuth}/>
       <Switch>
         
         <Route path="/login">

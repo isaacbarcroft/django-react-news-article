@@ -3,7 +3,7 @@ import { Route, Redirect, withRouter } from 'react-router-dom';
 import Cookies from 'js-cookie';
 import DraftArticle from '../DraftArticle/DraftArticle';
 import ReadMoreReact from 'read-more-react';
-
+import styled from 'styled-components';
 
 function MyArticles(props){
     const [state, setState] = useState({
@@ -13,7 +13,12 @@ function MyArticles(props){
         image: null,
         categories: '',
     })
-
+    const HoverText = styled.p`
+	color: #000;
+	:hover {
+		cursor: pointer;
+	}
+`
 
     const [myArticles, setMyArticles] = useState([]);
     const [selection, setSelection] = useState();
@@ -31,7 +36,7 @@ function MyArticles(props){
     }
         useEffect(() => {
         
-        async function getMyArticles(event){
+        async function getMyArticles(){
           const response = await fetch(`/api_v1/articles/?options=ALL`);
           if(!response.ok) {
             console.log(response);
@@ -43,7 +48,7 @@ function MyArticles(props){
           }
         }
         getMyArticles();
-      },[props.isAuth])
+      },[,props.isAuth])
       
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -73,19 +78,20 @@ function MyArticles(props){
       const readMore = <div className="readMore">Read More</div>
       const options = [...new Set(myArticles?.map(article => article.options))];
       console.log(options)
-      const categoriesHTML = options.map(option => <button className="myArticleButton nav-btn btn btn-dark mx-2 justify-content-center" key={option} style={{fontFamily: 'Oswald'}} onClick={() => setSelection(option)}>{option}</button>); 
+      const categoriesHTML = options.map(option => <button className="myArticleButton nav-btn btn btn-dark mx-2 justify-content-center btn-lg" key={option} style={{fontFamily: 'Oswald'}} onClick={() => setSelection(option)}>{option}</button>); 
       const myFilteredArticles = myArticles?.filter(article => selection ? article.options === selection : article);
       const myFilteredDrafts = myArticles?.filter(article => selection === "DRAFT" ? article.options === "DRAFT" : article);
-      const myFilteredDraftsHTML = myFilteredDrafts?.map(article => <DraftArticle article={article} />)
+      const myFilteredDraftsHTML = myFilteredDrafts?.map(article => <DraftArticle article={article}/>)
       
       console.log({myFilteredDrafts})
 
 
-      const myFilteredArticlesHTML = myFilteredArticles?.map(article => <div   style={{background: 'antiquewhite'}} className="backgroundDiv mt-3 shadow p-3 mb-5 bg-body rounded mt-2"><img className="article-image rounded mx-auto d-block" src={article.image}></img><span><p className="font-italic" style={{fontFamily: 'Oswald', fontStyle: 'iitalic'}}>{article.options}</p></span><h3 className="articleTitle" style={{fontFamily: 'Oswald'}}>{article.title}</h3><ReadMoreReact text={article.body}
+      const myFilteredArticlesHTML = myFilteredArticles?.map(article => <div   style={{background: 'antiquewhite'}} className="backgroundDiv mt-3 shadow p-3 mb-5 bg-body rounded mt-2"><img className="article-image rounded mx-auto d-block" src={article.image}></img><span><p className="font-italic" style={{fontFamily: 'Oswald', fontStyle: 'iitalic'}}>{article.options}</p></span><h3 className="articleTitle" style={{fontFamily: 'Oswald'}}>{article.title}</h3><HoverText><ReadMoreReact text={article.body}
       min={100}
       ideal={200}
       max={1000000}
-      readMoreText={readMore}/></div>)
+      style={{cursor: 'pointer'}}
+      readMoreText={readMore}/></HoverText></div>)
       console.log(myFilteredArticlesHTML)
 
     if(!props.isAuth){
@@ -94,12 +100,13 @@ function MyArticles(props){
     
     return(
         <>
-        <div className=" container-md ">
+        <div className=" container-md  mb-3">
         <h2 className="d-flex justify-content-center mt-2 headers shadow p-3 mb-5 bg-body rounded">My Articles</h2>
         <div class="container">
             <div class="row">
                 <div class="col text-center">
                     {categoriesHTML}
+                    <a className="homeButton nav-btn btn btn-dark mx-2 justify-content-center sticky-top btn-lg" href="#form" style={{fontFamily: 'Oswald'}} >Draft New</a>
                 </div>
             </div>
         </div>
@@ -107,10 +114,11 @@ function MyArticles(props){
 
         <div className="border" ></div>
         
-        <div className="container">
-        <div className="ds-flex justify-content-center mt-3">
+        <div className="container  mb-3">
+        <div className="ds-flex justify-content-center mt-3  mb-5">
         <h2 className="newArticleForm text-center mt-3">Submit new article</h2>
-        <form className="mt-3 ds-flex justify-content-center mt-3">
+        <form id="form"className="mt-3 ds-flex justify-content-center mt-3">
+            <a name="form" ></a>
             <div className="form-group text-left mb-3">
                 <label htmlFor='title'>Title</label>
                 <input type="text"
