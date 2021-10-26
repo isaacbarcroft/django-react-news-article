@@ -47,7 +47,7 @@ function MyArticles(props){
       
     const handleSubmit = (event) => {
         event.preventDefault();
-        const formData = new FormData(); /// contructing key - value pairs
+        const formData = new FormData(); 
         formData.append('title', state.title);
         formData.append('body', state.body);
         formData.append('options', event.target.value);

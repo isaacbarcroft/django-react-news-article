@@ -52,10 +52,11 @@ if(props.isAuth){
 
     return(
         <>
-            <h2 className='Registration-title mt-3 d-flex justify-content-center mt-3'>Register</h2>
+         <h2 className='Registration-title mt-3 d-flex justify-content-center mt-3  shadow p-3 mb-5 bg-body rounded'>Register</h2>
+            <div className="shadow p-3 mb-5 bg-body rounded mt-2">
+           
             <form className="form registrationForm d-flex justify-content-center mt-3" onSubmit={handleSubmit} >
-            {/* <div className=" text-left mb-3"> */}
-                {/* <div className="row"> */}
+
                     <div className="form-group form-control col-lg-1">
                         <input type='text'
                         className="form-user form-control  mt-3" 
@@ -66,10 +67,7 @@ if(props.isAuth){
                         onChange={handleChange}
                         value={user.username}
                         />
-                    {/* </div> */}
-                 {/* </div> */}
-                 {/* <div className="row">
-                    <div className="form-group col-xs-3 col-lg-1"> */}
+
                         <input type='text'
                         className="form-control col-xs-4 mt-3"
                             id='email'
@@ -79,10 +77,7 @@ if(props.isAuth){
                             onChange={handleChange}
                             value={user.email}
                             />
-                    {/* </div>
-                </div> */}
-                {/* <div className="row">
-                    <div className="form-group col-xs-5 col-lg-1"> */}
+
                         <input type='password'
                         className="form-control col-xs-4 mt-3"
                         id='password1'
@@ -92,10 +87,7 @@ if(props.isAuth){
                         onChange={handleChange}
                         value={user.password1}
                         />
-                    {/* </div>
-                </div> */}
-                {/* <div className="row">
-                    <div className="form-group col-xs-3 col-lg-1"> */}
+                   
                             <input type='password'
                         className="form-control col-xs-4 mt-3"
                         id='password2'
@@ -105,11 +97,11 @@ if(props.isAuth){
                         onChange={handleChange}
                         value={user.password2}
                         />
-                    {/* </div>
-                </div> */}
+
                  <button type="submit" className="registration-btn btn btn-dark d-flex justify-content-center mt-3"style={{fontFamily: 'Oswald'}}>Register</button>
                  </div>
             </form>
+            </div>
         </>
     )
 }

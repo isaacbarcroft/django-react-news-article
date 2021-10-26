@@ -43,8 +43,9 @@ function LoginPage(props){
     return(
 
         <>
-        <div className="container container-md mt-4" >
-            <h2 className='Login-title  d-flex justify-content-center mt-3' style={{fontFamily: 'Oswald'}}>Login</h2>
+        <h2 className='Login-title  d-flex justify-content-center mt-3  shadow p-3 mb-5 bg-body rounded' style={{fontFamily: 'Oswald'}}>Login</h2>
+        <div className="container container-md mt-4 shadow p-3 mb-5 bg-body rounded mt-2">
+            
             <form className="form-signin form  d-flex justify-content-center mt-3" onSubmit={handleSubmit} >
                 <input type='text'
                  className="form-user mx-3" 
@@ -83,6 +84,7 @@ function LoginPage(props){
                     </div>
                 </div>
             </div>   
+        
         </>
     )
 }
