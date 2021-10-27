@@ -33,7 +33,6 @@ const DraftArticle = (draftArticle) => {
         reader.readAsDataURL(file);
     }
     
-        
         async function getMyArticles(){
           const response = await fetch(`/api_v1/articles/?options=ALL/`);
           if(!response.ok) {
@@ -46,8 +45,6 @@ const DraftArticle = (draftArticle) => {
           }
         }
        
-     
-
       const handleSubmit = (event) => {
         event.preventDefault();
         const formData = new FormData(); /// contructing key - value pairs
@@ -68,8 +65,6 @@ const DraftArticle = (draftArticle) => {
        getMyArticles();
        console.log('drID',draftArticle.article.id)
        
-       draftArticle.article.options = "SUBMITTED"
-       console.log("after",draftArticle)
       }
 
     return (

@@ -78,7 +78,8 @@ function MyArticles(props){
       const readMore = <div className="readMore">Read More</div>
       const options = [...new Set(myArticles?.map(article => article.options))];
       console.log(options)
-      const categoriesHTML = options.map(option => <button className="myArticleButton nav-btn btn btn-dark mx-2 justify-content-center btn-lg" key={option} style={{fontFamily: 'Oswald'}} onClick={() => setSelection(option)}>{option}</button>); 
+      const categoriesHTML = options.map(option =>
+         <button className="myArticleButton nav-btn btn btn-dark mx-2 justify-content-center btn-lg" key={option} style={{fontFamily: 'Oswald'}} onClick={() => setSelection(option)}>{option}</button>); 
       const myFilteredArticles = myArticles?.filter(article => selection ? article.options === selection : article);
       const myFilteredDrafts = myArticles?.filter(article => selection === "DRAFT" ? article.options === "DRAFT" : article);
       const myFilteredDraftsHTML = myFilteredDrafts?.map(article => <DraftArticle article={article}/>)
@@ -86,12 +87,19 @@ function MyArticles(props){
       console.log({myFilteredDrafts})
 
 
-      const myFilteredArticlesHTML = myFilteredArticles?.map(article => <div   style={{background: 'antiquewhite'}} className="backgroundDiv mt-3 shadow p-3 mb-5 bg-body rounded mt-2"><img className="article-image rounded mx-auto d-block" src={article.image}></img><p className="ds-flex justify-content-center text-align-center" style={{fontStyle: 'italic'}}> by {article.author_name.charAt(0).toUpperCase() + article.author_name.slice(1)}</p><span><p className="font-italic" style={{fontFamily: 'Oswald', fontStyle: 'iitalic'}}>{article.options}</p></span><h3 className="articleTitle" style={{fontFamily: 'Oswald'}}>{article.title}</h3><HoverText><ReadMoreReact text={article.body}
-      min={100}
-      ideal={200}
-      max={1000000}
-      style={{cursor: 'pointer'}}
-      readMoreText={readMore}/></HoverText></div>)
+      const myFilteredArticlesHTML = myFilteredArticles?.map(article => 
+        <div   style={{background: 'antiquewhite'}} className="backgroundDiv mt-3 shadow p-3 mb-5 bg-body rounded mt-2">
+        <img className="article-image rounded mx-auto d-block" src={article.image}></img>
+        <p className="ds-flex justify-content-center text-align-center" style={{fontStyle: 'italic'}}> by {article.author_name.charAt(0).toUpperCase() + article.author_name.slice(1)}</p>
+        <span><p className="font-italic" style={{fontFamily: 'Oswald', fontStyle: 'iitalic'}}>{article.options}</p></span>
+        <h3 className="articleTitle" style={{fontFamily: 'Oswald'}}>{article.title}</h3>
+        <HoverText><ReadMoreReact text={article.body}
+            min={100}
+            ideal={200}
+            max={1000000}
+            style={{cursor: 'pointer'}}
+            readMoreText={readMore}/>
+        </HoverText></div>)
       console.log(myFilteredArticlesHTML)
 
     if(!props.isAuth){

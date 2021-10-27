@@ -41,7 +41,7 @@ class ArticleListAPIView(generics.ListCreateAPIView):
 class ArticleDetailAPIView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Article.objects.all()
     serializer_class = ArticleSerializer
-    permission_classes = (IsOwnerOrReadOnly,)
+    permission_classes = (IsAuthenticatedOrReadOnly,)
 
 
 # class ArticleListAPIView(generics.ListCreateAPIView):

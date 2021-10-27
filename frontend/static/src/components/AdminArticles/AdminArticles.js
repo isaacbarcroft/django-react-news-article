@@ -27,13 +27,13 @@ function AdminArticles(props){
         setState({...state, [name]: value});
       } 
 
-    const handleImage = (event) => {
-        const file = event.target.files[0];
-        setState({
-          ...state, 
-          image: file,
-        });
-    }
+    // const handleImage = (event) => {
+    //     const file = event.target.files[0];
+    //     setState({
+    //       ...state, 
+    //       image: file,
+    //     });
+    // }
         useEffect(() => {
         
         async function getAllArticles(){
@@ -50,30 +50,32 @@ function AdminArticles(props){
         getAllArticles();
       },[,props.isAuth])
       
-    const handleSubmit = (event) => {
+    const handleSubmit = async (event, body) => {
         event.preventDefault();
+       
         const formData = new FormData(); 
-        formData.append('title', state.title);
-        formData.append('body', state.body);
-        formData.append('options', event.target.value);
-        formData.append('image', state.image);
-        formData.append('categories', state.categories);
+        formData.append('options', event.target.dataset.options);
+        formData.append('body', body);
+
+        
   
         const options = {
-          method: 'POST',
+          method: 'PUT',
           headers: {
             'X-CSRFToken': Cookies.get('csrftoken'),
           },
           body: formData,
         }
-        fetch('/api_v1/articles/', options);
-        setState({
-            title: '',
-            body: '',
-            options: '',
-            image: null,
-            categories: '',
-        })
+        
+        const response = await fetch(`/api_v1/articles/${event.target.value}/`, options);
+        // const data = await response.json();
+        if(!response.ok) {
+            console.log(response);
+        } else {
+            const updatedAllArticles = allArticles.filter(article => article.id != event.target.value);
+            setallArticles(updatedAllArticles);
+        }
+       
       }
       const readMore = <div className="readMore">Read More</div>
       const options = [...new Set(allArticles?.map(article => article.options))];
@@ -91,7 +93,7 @@ function AdminArticles(props){
       ideal={200}
       max={1000000}
       style={{cursor: 'pointer'}}
-      readMoreText={readMore}/></HoverText>{selection === 'SUBMITTED' ? <div><button className="myArticleButton nav-btn btn btn-dark mx-2 justify-content-center">DRAFT</button><button className="myArticleButton nav-btn btn btn-dark mx-2 justify-content-center">PUBLISH</button></div> : <p></p> }</div>)
+      readMoreText={readMore}/></HoverText>{selection === 'SUBMITTED' ? <div><button data-options="REJECTED" value={article.id} onClick={(e) => handleSubmit(e, article.body)} className="myArticleButton nav-btn btn btn-dark mx-2 justify-content-center">REJECT</button><button data-options="PUBLISHED" value={article.id} onClick={(e) => handleSubmit(e, article.body)} className="myArticleButton nav-btn btn btn-dark mx-2 justify-content-center">PUBLISH</button></div> : <p></p> }</div>)
       console.log(myFilteredArticlesHTML)
 
     if(!props.isAuth){
@@ -106,7 +108,7 @@ function AdminArticles(props){
             <div class="row">
                 <div class="col text-center">
                     {categoriesHTML}
-                    <a className="homeButton nav-btn btn btn-dark mx-2 justify-content-center sticky-top btn-lg" href="#form" style={{fontFamily: 'Oswald'}} >Draft New</a>
+                    {/* <a className="homeButton nav-btn btn btn-dark mx-2 justify-content-center sticky-top btn-lg" href="#form" style={{fontFamily: 'Oswald'}} >Draft New</a> */}
                 </div>
             </div>
         </div>
@@ -116,7 +118,7 @@ function AdminArticles(props){
         
         <div className="container  mb-3">
         <div className="ds-flex justify-content-center mt-3  mb-5">
-        <h2 className="newArticleForm text-center mt-3">Submit new article</h2>
+        {/* <h2 className="newArticleForm text-center mt-3">Submit new article</h2>
         <form id="form"className="mt-3 ds-flex justify-content-center mt-3">
             <a name="form" ></a>
             <div className="form-group text-left mb-3">
@@ -156,7 +158,7 @@ function AdminArticles(props){
         
             <div className="form-group text-left mb-3 ">
                 {/* <label htmlFor='options'>Draft/Submitted</label> */}
-                <button type="button"
+                {/* <button type="button"
                     className="homeButton form-control btn btn-dark"
                     id='articleOptions'
                     onClick={handleSubmit}
@@ -167,7 +169,7 @@ function AdminArticles(props){
             </div>
             <div className="form-group text-left mb-3">
                 {/* <label htmlFor='options'>Draft/Submitted</label> */}
-                <button type="button"
+                {/* <button type="button"
                     className=" homeButton form-control  btn btn-dark"
                     id='articleOptions'
                     onClick={handleSubmit}
@@ -175,10 +177,10 @@ function AdminArticles(props){
                     name='DFT'
                     value='SUBMIT'
                 >Submit</button>
-            </div>
+            </div> */}
             
          
-        </form>
+        {/* </form>  */}
         </div>
         </div>
         </div>
