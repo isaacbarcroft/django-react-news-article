@@ -2,9 +2,9 @@ import { useState, useEffect } from 'react';
 import { Route, Redirect, withRouter } from 'react-router-dom';
 import Cookies from 'js-cookie';
 
-const DraftArticle = (draftArticle, props) => {
+const DraftArticle = (draftArticle) => {
     console.log({draftArticle})
-    const [myArticles, setMyArticles] = useState([]);
+    
     const [article, setArticle] = useState({
 
         title: draftArticle.article.title,
@@ -14,7 +14,7 @@ const DraftArticle = (draftArticle, props) => {
         categories: draftArticle.article.categories,
     })
     const [preview, setPreview] = useState('');
-
+    console.log("before",draftArticle)
     const handleChange = (event) => {
         const {name, value} = event.target;
         setArticle({...article, [name]: value});
@@ -40,9 +40,9 @@ const DraftArticle = (draftArticle, props) => {
             console.log(response);
           } else {
             const data = await response.json();
-            setMyArticles(data);
+            // setMyArticles(data);
             console.log({data})
-            console.log({myArticles})
+            // console.log({myArticles})
           }
         }
        
@@ -67,6 +67,9 @@ const DraftArticle = (draftArticle, props) => {
         fetch(`/api_v1/articles/${draftArticle.article.id}/`, options);
        getMyArticles();
        console.log('drID',draftArticle.article.id)
+       
+       draftArticle.article.options = "SUBMITTED"
+       console.log("after",draftArticle)
       }
 
     return (

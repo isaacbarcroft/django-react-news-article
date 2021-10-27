@@ -13,8 +13,14 @@ import Categories from './../Categories/Categories';
 import MyArticles from './../MyArticles/MyArticles';
 import Footer from '../Footer/Footer';
 import ScrollTop from 'react-scrolltop-button';
+import AdminArticles from '../AdminArticles/AdminArticles';
 
 function App() {
+  const [admin, setAdmin] = useState({
+    username: "",
+    email: "",
+    is_staff: null,
+  });
   const [profile, setProfile] = useState({
     alias: '',
     image: null,
@@ -38,15 +44,20 @@ const location = useLocation();
       console.log('not ok')
       setIsAuth(false);
     } else {
+      const data = await response.json();
+      setAdmin(data)
       console.log({response})
+      console.log({data})
       setIsAuth(true);
+      console.log({admin})
+      console.log(admin.is_staff)
     }
     return function cleanup(){
       abortController.abort();
     }
    }
    checkAuth()
-  }, [history])
+  }, [isAuth])
 
   useEffect(() => {
   async function getArticles(){
@@ -108,7 +119,7 @@ const location = useLocation();
   return (
     
       <>
-      <Header handleLogoutSubmit={handleLogoutSubmit} isAuth={isAuth}/>
+      <Header handleLogoutSubmit={handleLogoutSubmit} isAuth={isAuth} admin={admin}/>
       <Switch>
         
         <Route path="/login">
@@ -125,6 +136,9 @@ const location = useLocation();
         </Route>
         <Route path='/myarticles' >
           <MyArticles articles={articles} isAuth={isAuth}/>
+        </Route>
+        <Route path='/admin' >
+          <AdminArticles articles={articles} isAuth={isAuth} admin={admin}/>
         </Route>
         <Route path='/' >
           <Home articles={articles} />

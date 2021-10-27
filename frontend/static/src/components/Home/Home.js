@@ -25,7 +25,7 @@ function Home(props){
     const categories = [...new Set(props.articles?.map(article => article.categories))];
     const categoriesHTML = categories.map(categories => <button className="homeButton nav-btn btn btn-dark mx-2 justify-content-center sticky-top btn-lg" style={{fontFamily: 'Oswald'}} key={categories} onClick={() => setSelection(categories)}>{categories}</button>); 
     const filteredArticles = props.articles?.filter(article => selection ? article.categories === selection : article);
-    const filteredArticlesHTML = filteredArticles?.map(article => <div className="mt-3 shadow p-3 mb-5 bg-body rounded"><img className="article-image rounded mx-auto d-block" src={article.image}></img><p>{article.username}</p><h3 className="articleTitle" style={{fontFamily: 'Oswald'}}>{article.title}</h3><HoverText><ReadMoreReact text={article.body}
+    const filteredArticlesHTML = filteredArticles?.map(article => <div className="mt-3 shadow p-3 mb-5 bg-body rounded"><img className="article-image rounded mx-auto d-block" src={article.image}></img><p style={{fontStyle: 'italic'}}> by {article.author_name.charAt(0).toUpperCase() + article.author_name.slice(1)}</p><h3 className="articleTitle" style={{fontFamily: 'Oswald'}}>{article.title}</h3><HoverText><ReadMoreReact text={article.body}
             min={80}
             ideal={100}
             max={1000}
@@ -58,7 +58,7 @@ function Home(props){
                     {filteredArticlesHTML}
                 </div>
                 <div class="col">
-                    <SideMenu  />
+                    <SideMenu  selection={selection}/>
                 </div>
             </div>
         </div>

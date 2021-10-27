@@ -5,7 +5,7 @@ import DraftArticle from '../DraftArticle/DraftArticle';
 import ReadMoreReact from 'read-more-react';
 import styled from 'styled-components';
 
-function MyArticles(props){
+function AdminArticles(props){
     const [state, setState] = useState({
         title: '',
         body: '',
@@ -20,7 +20,7 @@ function MyArticles(props){
 	}
 `
 
-    const [myArticles, setMyArticles] = useState([]);
+    const [allArticles, setallArticles] = useState([]);
     const [selection, setSelection] = useState();
     const handleChange = (event) => {
         const {name, value} = event.target;
@@ -36,18 +36,18 @@ function MyArticles(props){
     }
         useEffect(() => {
         
-        async function getMyArticles(){
+        async function getAllArticles(){
           const response = await fetch(`/api_v1/articles/?options=ALL`);
           if(!response.ok) {
             console.log(response);
           } else {
             const data = await response.json();
-            setMyArticles(data);
+            setallArticles(data);
             console.log({data})
-            console.log({myArticles})
+            console.log({allArticles})
           }
         }
-        getMyArticles();
+        getAllArticles();
       },[,props.isAuth])
       
     const handleSubmit = (event) => {
@@ -76,11 +76,11 @@ function MyArticles(props){
         })
       }
       const readMore = <div className="readMore">Read More</div>
-      const options = [...new Set(myArticles?.map(article => article.options))];
+      const options = [...new Set(allArticles?.map(article => article.options))];
       console.log(options)
       const categoriesHTML = options.map(option => <button className="myArticleButton nav-btn btn btn-dark mx-2 justify-content-center btn-lg" key={option} style={{fontFamily: 'Oswald'}} onClick={() => setSelection(option)}>{option}</button>); 
-      const myFilteredArticles = myArticles?.filter(article => selection ? article.options === selection : article);
-      const myFilteredDrafts = myArticles?.filter(article => selection === "DRAFT" ? article.options === "DRAFT" : article);
+      const myFilteredArticles = allArticles?.filter(article => selection ? article.options === selection : article);
+      const myFilteredDrafts = allArticles?.filter(article => selection === "DRAFT" ? article.options === "DRAFT" : article);
       const myFilteredDraftsHTML = myFilteredDrafts?.map(article => <DraftArticle article={article}/>)
       
       console.log({myFilteredDrafts})
@@ -91,7 +91,7 @@ function MyArticles(props){
       ideal={200}
       max={1000000}
       style={{cursor: 'pointer'}}
-      readMoreText={readMore}/></HoverText></div>)
+      readMoreText={readMore}/></HoverText>{selection === 'SUBMITTED' ? <div><button className="myArticleButton nav-btn btn btn-dark mx-2 justify-content-center">DRAFT</button><button className="myArticleButton nav-btn btn btn-dark mx-2 justify-content-center">PUBLISH</button></div> : <p></p> }</div>)
       console.log(myFilteredArticlesHTML)
 
     if(!props.isAuth){
@@ -101,7 +101,7 @@ function MyArticles(props){
     return(
         <>
         <div className=" container-md  mb-3">
-        <h2 className="d-flex justify-content-center mt-2 headers shadow p-3 mb-5 bg-body rounded">My Articles</h2>
+        <h2 className="d-flex justify-content-center mt-2 headers shadow p-3 mb-5 bg-body rounded">Admin</h2>
         <div class="container">
             <div class="row">
                 <div class="col text-center">
@@ -186,4 +186,4 @@ function MyArticles(props){
     )
 }
 
-export default MyArticles;
+export default AdminArticles;

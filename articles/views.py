@@ -16,7 +16,10 @@ class ArticleListAPIView(generics.ListCreateAPIView):
     def get_queryset(self):
         # url api_v1/articles/ will only return publishef articles
         # url with options for an authenticated user will return articles filtered by that option
-       
+        if self.request.user.is_staff:
+          return Article.objects.all()
+
+
         if not self.request.user.is_anonymous:
             options_text = self.request.query_params.get('options')
             if options_text is not None:
